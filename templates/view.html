@@ -1,14 +1,19 @@
 <!doctype html>
 <title>Simple tables</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<div class=page>
+<script>$(document).ready( function () {
+  $('#table').DataTable();
+} );</script>
+ <div class=page>
   <h1>list</h1>
   {% for table in tables %}
     <h2>{{titles[loop.index]}}</h2>
     {{ table|safe }}
   {% endfor %}
-<h2>grafic</h2>
-<img src="{{ url_for('static', filename='demo-file.png') }}">
+
 
 
 </div>
