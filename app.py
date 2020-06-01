@@ -11,9 +11,9 @@ def generateDF():
     global data
     mode = os.getenv("MODE")
     if mode == "prod":
-        data= pd.read_csv('/app/data.csv')
+        data= pd.read_csv('static\data.csv')
     else:
-        data= pd.read_csv('data.csv')
+        data= pd.read_csv('static\data.csv')
 
 @app.route("/info")
 def getInfo():
@@ -25,9 +25,9 @@ def getInfo():
 def getFile():
     mode = os.getenv("MODE")
     if mode == "prod":
-        return app.send_static_file('/app/data.csv')
+        return app.send_static_file('static\data.csv')
     else:
-        return app.send_static_file('data.csv')
+        return app.send_static_file('static\data.csv')
 
 
 #region<success>

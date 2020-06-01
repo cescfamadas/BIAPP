@@ -1,3 +1,4 @@
 .vscode/settings.json
 env/
 static/demo-file.png
+constants.py
