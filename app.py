@@ -25,7 +25,7 @@ def getInfo():
 def getFile():
     mode = os.getenv("MODE")
     if mode == "prod":
-        return send_file('app\static\demo-file.png', mimetype='image/gif')
+        return send_file('static/demo-file.png', mimetype='image/gif')
     else:
         return send_file('static\demo-file.png', mimetype='image/gif')
     #return app.send_static_file('static\demo-file.png')
