@@ -1,7 +1,6 @@
 from flask import *
 import pandas as pd
 import matplotlib
-import constants
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 data=None
