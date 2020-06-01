@@ -11,7 +11,7 @@ def generateDF():
     global data
     mode = os.getenv("MODE")
     if mode == "prod":
-        data= pd.read_csv('static\data.csv')
+        data= pd.read_csv('static/data.csv')
     else:
         data= pd.read_csv('static\data.csv')
 
