@@ -21,6 +21,15 @@ def getInfo():
     columns=list(data.columns)
     return render_template("info.html",head=head,columns=columns) 
 
+@app.route("/data.csv")
+def getFile():
+    mode = os.getenv("MODE")
+    if mode == "prod":
+        return app.send_static_file('/app/data.csv')
+    else:
+        return app.send_static_file('data.csv')
+
+
 #region<success>
 """ # @app.route('/success', methods = ['POST'])  
 # def success():  
