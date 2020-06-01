@@ -5,6 +5,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import requests
+import logging
+
 data=None
 app = Flask(__name__)
 
@@ -12,10 +14,9 @@ def generateDF():
     global data
     mode = os.getenv("MODE")
     if mode == "prod":
-        # url="https://aqueous-mountain-99605.herokuapp.com/data"
-        # s=requests.get(url).content
-        # data= pd.read_csv(s)
-        data= pd.read_csv('data.csv')
+        url="https://aqueous-mountain-99605.herokuapp.com/data"
+        s=requests.get(url).content
+        data= pd.read_csv(s)
     else:
         data= pd.read_csv('static\data.csv')
 
@@ -75,8 +76,9 @@ def index():
  #endregion
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
     generateDF()
-    print(data)
+    logging.debug(data)
     mode = os.getenv("MODE")
     if mode == "prod":
         app.run(debug=True)
