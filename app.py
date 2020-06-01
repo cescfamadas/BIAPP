@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import requests
 data=None
 app = Flask(__name__)
 
@@ -11,7 +12,9 @@ def generateDF():
     global data
     mode = os.getenv("MODE")
     if mode == "prod":
-        data= pd.read_csv('static/data.csv')
+        url="https://aqueous-mountain-99605.herokuapp.com/data"
+        s=requests.get(url).content
+        data= pd.read_csv(s)
     else:
         data= pd.read_csv('static\data.csv')
 
