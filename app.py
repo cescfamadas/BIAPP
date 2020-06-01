@@ -21,6 +21,14 @@ def getInfo():
     columns=list(data.columns)
     return render_template("info.html",head=head,columns=columns) 
 
+@app.route("/data")
+def getData():
+    mode = os.getenv("MODE")
+    if mode == "prod":
+        return send_file('static/data.csv', mimetype='text/plain')
+    else:
+        return send_file('static\data.csv', mimetype='text/plain')
+
 @app.route("/demo")
 def getFile():
     mode = os.getenv("MODE")
@@ -28,7 +36,6 @@ def getFile():
         return send_file('static/demo-file.png', mimetype='image/gif')
     else:
         return send_file('static\demo-file.png', mimetype='image/gif')
-    #return app.send_static_file('static\demo-file.png')
 
 
 #region<success>
