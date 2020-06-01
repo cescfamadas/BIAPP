@@ -76,9 +76,9 @@ def index():
  #endregion
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     generateDF()
-    logging.debug(data)
+    logging.info(data)
     mode = os.getenv("MODE")
     if mode == "prod":
         app.run(debug=True)
