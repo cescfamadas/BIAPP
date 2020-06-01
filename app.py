@@ -17,7 +17,7 @@ def generateDF():
         # url="https://aqueous-mountain-99605.herokuapp.com/data"
         # s=requests.get(url).content
         # data= pd.read_csv(s)
-        data= pd.read_csv('static/data.csv')
+        data= pd.read_csv('data.csv')
     else:
         data= pd.read_csv('static\data.csv')
 
