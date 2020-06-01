@@ -1,3 +1,4 @@
+import os
 from flask import *
 import pandas as pd
 import matplotlib
@@ -8,7 +9,11 @@ app = Flask(__name__)
 
 def generateDF():
     global data
-    data= pd.read_csv('data.csv')  
+    mode = os.getenv("MODE")
+    if mode == "prod":
+        data= pd.read_csv('/app/data.csv')
+    else:
+        data= pd.read_csv('data.csv')
 
 @app.route("/info")
 def getInfo():
@@ -50,7 +55,11 @@ def upload():
 
 if __name__ == "__main__":
     generateDF()
-    app.run(debug=True)
+    mode = os.getenv("MODE")
+    if mode == "prod":
+        app.run()
+    else:
+        app.run(debug=True)
     # https://sarahleejane.github.io/learning/python/2015/08/09/simple-tables-in-webapps-using-flask-and-pandas-with-python.html
     # https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
     #https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
