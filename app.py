@@ -75,7 +75,7 @@ def index():
 
 if __name__ == "__main__":
     generateDF()
-    print data
+    print(data)
     mode = os.getenv("MODE")
     if mode == "prod":
         app.run(debug=True)
