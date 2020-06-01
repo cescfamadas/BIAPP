@@ -12,9 +12,10 @@ def generateDF():
     global data
     mode = os.getenv("MODE")
     if mode == "prod":
-        url="https://aqueous-mountain-99605.herokuapp.com/data"
-        s=requests.get(url).content
-        data= pd.read_csv(s)
+        # url="https://aqueous-mountain-99605.herokuapp.com/data"
+        # s=requests.get(url).content
+        # data= pd.read_csv(s)
+        data= pd.read_csv('data.csv')
     else:
         data= pd.read_csv('static\data.csv')
 
