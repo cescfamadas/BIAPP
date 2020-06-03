@@ -1,5 +1,5 @@
 import os
-from os import path
+import pathlib
 from flask import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -10,6 +10,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 #import requests
 import logging
+import DFToSql
 
 data=None
 logging.basicConfig(level=logging.INFO)
@@ -94,7 +95,12 @@ def index():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    generateDF()
+    file = pathlib.Path("test.db")
+    if file.exists ():
+        generateDF()
+    else:
+        DFToSql.dfToSql()
+        generateDF()
     app.register_error_handler(404, not_found)
     app.run(debug=True)
     # https://sarahleejane.github.io/learning/python/2015/08/09/simple-tables-in-webapps-using-flask-and-pandas-with-python.html

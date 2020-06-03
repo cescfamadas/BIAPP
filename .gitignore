@@ -1,4 +1,4 @@
 .vscode/settings.json
 env/
 constants.py
-__pycache__/constants.cpython-37.pyc
+__pycache__/
