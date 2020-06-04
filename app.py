@@ -8,7 +8,6 @@ import matplotlib
 import sqlite3
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-#import requests
 import logging
 import DFToSql
 
@@ -16,6 +15,8 @@ data=None
 logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -29,17 +30,16 @@ class User(db.Model):
     rand=db.Column(db.Integer,nullable=False)
 
     def __repr__(self):
-        return '<User %r>' % self.id
+        return '<User id={} first name={} country={} city={} profession={} age={} gender={} rand={}>'.format(self.id,self.firstname,self.country,self.city,self.profession,self.age,self.gender,self.rand)
 
 
 def generateDF():
     global data
-    logging.info("generating DF")
-    engine = create_engine("sqlite:///test.db", echo=True)
+    engine = create_engine("sqlite:///test.db")
     sqlite_connection = engine.connect()
     sqlite_table = "User"
     data=pd.read_sql(sqlite_table, sqlite_connection)
-    logging.info(data.head())
+    data.drop(['index'],axis=1)
     sqlite_connection.close()
 
 @app.route("/regenerateDF")
@@ -47,12 +47,42 @@ def regenerateDF():
     generateDF()
     return redirect('/')
 
+@app.route("/getuser/<id>")
+def getUserById(id):
+    user=User.query.get(id)
+    return render_template("user.html",user=user)
+@app.route("/getusers")
+def getUsers():
+    users=User.query.all()
+    return render_template("user.html",user=users)
+
+@app.route("/adduser")
+def addUserForm():
+    return render_template("addUserForm.html")
 @app.route("/info")
 def getInfo():
     head= data.head()
     columns=list(data.columns)
     return render_template("info.html",head=head,columns=columns) 
 
+@app.route("/add",methods=['POST'])
+def adduser():
+    if request.method== 'POST':
+        logging.info("POST")
+        user_id=request.form['id']
+        user_firstname=request.form['firstname']
+        user_country=request.form['country']
+        user_profession=request.form['profession']
+        user_age=request.form['age']
+        user_gender=request.form['gender']
+        user_rand=request.form['rand']
+        new_user=User(id=user_id,firstname=user_firstname,country=user_country,profession=user_profession,age=user_age,gender=user_gender,rand=user_rand)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except EnvironmentError:
+            print("error al inserir usuari")
+    return redirect("/")
 @app.route("/json")
 def dfToJson():
     return Response(data.to_json(orient="records"), mimetype='application/json')
@@ -66,8 +96,8 @@ def sayHello(name):
 
 @app.route("/tables")
 def show_tables():
-    return render_template('view.html',tables=[data.to_html(classes = '" id = "table')],
-    titles = ['titol'])
+    users=User.query.all()
+    return render_template('view.html',users=users)
 
 @app.errorhandler(404)
 def not_found(e):

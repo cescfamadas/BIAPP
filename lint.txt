@@ -1,0 +1,232 @@
+************* Module app
+app.py:14:4: C0326: Exactly one space required around assignment
+data=None
+    ^ (bad-whitespace)
+app.py:21:6: C0326: Exactly one space required before assignment
+    id= db.Column(db.Integer,primary_key=True)
+      ^ (bad-whitespace)
+app.py:21:28: C0326: Exactly one space required after comma
+    id= db.Column(db.Integer,primary_key=True)
+                            ^ (bad-whitespace)
+app.py:22:13: C0326: Exactly one space required around assignment
+    firstname=db.Column(db.String(200),nullable=False)
+             ^ (bad-whitespace)
+app.py:22:38: C0326: Exactly one space required after comma
+    firstname=db.Column(db.String(200),nullable=False)
+                                      ^ (bad-whitespace)
+app.py:23:11: C0326: Exactly one space required around assignment
+    country=db.Column(db.String(200),nullable=False)
+           ^ (bad-whitespace)
+app.py:23:36: C0326: Exactly one space required after comma
+    country=db.Column(db.String(200),nullable=False)
+                                    ^ (bad-whitespace)
+app.py:24:8: C0326: Exactly one space required around assignment
+    city=db.Column(db.String(200),nullable=False)
+        ^ (bad-whitespace)
+app.py:24:33: C0326: Exactly one space required after comma
+    city=db.Column(db.String(200),nullable=False)
+                                 ^ (bad-whitespace)
+app.py:25:14: C0326: Exactly one space required around assignment
+    profession=db.Column(db.String(200),nullable=False)
+              ^ (bad-whitespace)
+app.py:25:39: C0326: Exactly one space required after comma
+    profession=db.Column(db.String(200),nullable=False)
+                                       ^ (bad-whitespace)
+app.py:26:7: C0326: Exactly one space required around assignment
+    age=db.Column(db.Integer,nullable=False)
+       ^ (bad-whitespace)
+app.py:26:28: C0326: Exactly one space required after comma
+    age=db.Column(db.Integer,nullable=False)
+                            ^ (bad-whitespace)
+app.py:27:10: C0326: Exactly one space required around assignment
+    gender=db.Column(db.String(50),nullable=False)
+          ^ (bad-whitespace)
+app.py:27:34: C0326: Exactly one space required after comma
+    gender=db.Column(db.String(50),nullable=False)
+                                  ^ (bad-whitespace)
+app.py:28:8: C0326: Exactly one space required around assignment
+    rand=db.Column(db.Integer,nullable=False)
+        ^ (bad-whitespace)
+app.py:28:29: C0326: Exactly one space required after comma
+    rand=db.Column(db.Integer,nullable=False)
+                             ^ (bad-whitespace)
+app.py:39:8: C0326: Exactly one space required around assignment
+    data=pd.read_sql(sqlite_table, sqlite_connection)
+        ^ (bad-whitespace)
+app.py:49:8: C0326: Exactly one space required before assignment
+    head= data.head()
+        ^ (bad-whitespace)
+app.py:50:11: C0326: Exactly one space required around assignment
+    columns=list(data.columns)
+           ^ (bad-whitespace)
+app.py:51:65: C0303: Trailing whitespace (trailing-whitespace)
+app.py:51:38: C0326: Exactly one space required after comma
+    return render_template("info.html",head=head,columns=columns) 
+                                      ^ (bad-whitespace)
+app.py:51:48: C0326: Exactly one space required after comma
+    return render_template("info.html",head=head,columns=columns) 
+                                                ^ (bad-whitespace)
+app.py:58:19: C0326: Exactly one space required after comma
+@app.route("/hello",defaults={'name': 'john'})
+                   ^ (bad-whitespace)
+app.py:61:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:61:38: C0326: Exactly one space required after comma
+   return render_template("hello.html",name=name)
+                                      ^ (bad-whitespace)
+app.py:66:38: C0326: Exactly one space required after comma
+    return render_template('view.html',tables=[data.to_html(classes = '" id = "table')],
+                                      ^ (bad-whitespace)
+app.py:66:68: C0326: No space allowed around keyword argument assignment
+    return render_template('view.html',tables=[data.to_html(classes = '" id = "table')],
+                                                                    ^ (bad-whitespace)
+app.py:67:0: C0330: Wrong continued indentation (add 23 spaces).
+    titles = ['titol'])
+    ^                      | (bad-continuation)
+app.py:67:11: C0326: No space allowed around keyword argument assignment
+    titles = ['titol'])
+           ^ (bad-whitespace)
+app.py:75:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:75:26: C0326: Exactly one space required after comma
+   data.groupby(['country','profession']).size().unstack().plot(kind='bar',stacked=True)
+                          ^ (bad-whitespace)
+app.py:75:74: C0326: Exactly one space required after comma
+   data.groupby(['country','profession']).size().unstack().plot(kind='bar',stacked=True)
+                                                                          ^ (bad-whitespace)
+app.py:76:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:77:0: C0303: Trailing whitespace (trailing-whitespace)
+app.py:78:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:78:25: C0326: Exactly one space required after comma
+   data.groupby(['gender','profession']).size().unstack().plot(kind='bar',stacked=True)
+                         ^ (bad-whitespace)
+app.py:78:73: C0326: Exactly one space required after comma
+   data.groupby(['gender','profession']).size().unstack().plot(kind='bar',stacked=True)
+                                                                         ^ (bad-whitespace)
+app.py:79:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:80:0: C0303: Trailing whitespace (trailing-whitespace)
+app.py:81:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:81:33: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                 ^ (bad-whitespace)
+app.py:81:42: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                          ^ (bad-whitespace)
+app.py:81:45: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                             ^ (bad-whitespace)
+app.py:81:48: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                                ^ (bad-whitespace)
+app.py:81:51: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                                   ^ (bad-whitespace)
+app.py:81:55: C0326: Exactly one space required after comma
+   data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
+                                                       ^ (bad-whitespace)
+app.py:82:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:83:0: C0303: Trailing whitespace (trailing-whitespace)
+app.py:84:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:84:27: C0326: Exactly one space required after comma
+   data.plot(kind='scatter',x='rand',y='age')
+                           ^ (bad-whitespace)
+app.py:84:36: C0326: Exactly one space required after comma
+   data.plot(kind='scatter',x='rand',y='age')
+                                    ^ (bad-whitespace)
+app.py:85:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:86:0: C0303: Trailing whitespace (trailing-whitespace)
+app.py:87:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+app.py:96:19: C0326: No space allowed before bracket
+    if file.exists ():
+                   ^ (bad-whitespace)
+app.py:105:0: C0304: Final newline missing (missing-final-newline)
+app.py:76:6: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+app.py:79:6: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+app.py:82:6: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+app.py:85:6: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+app.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+app.py:3:0: W0401: Wildcard import flask (wildcard-import)
+app.py:10:0: C0413: Import "import matplotlib.pyplot as plt" should be placed at the top of the module (wrong-import-position)
+app.py:11:0: C0413: Import "import logging" should be placed at the top of the module (wrong-import-position)
+app.py:12:0: C0413: Import "import DFToSql" should be placed at the top of the module (wrong-import-position)
+app.py:14:0: C0103: Constant name "data" doesn't conform to UPPER_CASE naming style (invalid-name)
+app.py:20:0: C0115: Missing class docstring (missing-class-docstring)
+app.py:21:8: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:21:18: E1101: Instance of 'SQLAlchemy' has no 'Integer' member (no-member)
+app.py:22:14: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:22:24: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:23:12: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:23:22: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:24:9: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:24:19: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:25:15: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:25:25: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:26:8: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:26:18: E1101: Instance of 'SQLAlchemy' has no 'Integer' member (no-member)
+app.py:27:11: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:27:21: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:28:9: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
+app.py:28:19: E1101: Instance of 'SQLAlchemy' has no 'Integer' member (no-member)
+app.py:20:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+app.py:34:0: C0103: Function name "generateDF" doesn't conform to snake_case naming style (invalid-name)
+app.py:34:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:35:4: C0103: Constant name "data" doesn't conform to UPPER_CASE naming style (invalid-name)
+app.py:35:4: W0603: Using the global statement (global-statement)
+app.py:43:0: C0103: Function name "regenerateDF" doesn't conform to snake_case naming style (invalid-name)
+app.py:43:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:48:0: C0103: Function name "getInfo" doesn't conform to snake_case naming style (invalid-name)
+app.py:48:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:54:0: C0103: Function name "dfToJson" doesn't conform to snake_case naming style (invalid-name)
+app.py:54:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:59:0: C0103: Function name "sayHello" doesn't conform to snake_case naming style (invalid-name)
+app.py:59:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:65:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:70:0: C0103: Argument name "e" doesn't conform to snake_case naming style (invalid-name)
+app.py:70:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:70:14: W0613: Unused argument 'e' (unused-argument)
+app.py:74:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:91:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:1:0: W0611: Unused import os (unused-import)
+app.py:3:0: W0614: Unused import escape from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import Markup from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import abort from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import json from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import json_available from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import Request from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import Blueprint from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import Config from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import after_this_request from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import copy_current_request_context from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import has_app_context from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import has_request_context from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import current_app from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import g from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import request from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import session from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import flash from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import get_flashed_messages from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import get_template_attribute from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import make_response from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import safe_join from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import send_file from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import send_from_directory from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import stream_with_context from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import url_for from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import jsonify from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import appcontext_popped from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import appcontext_pushed from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import appcontext_tearing_down from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import before_render_template from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import got_request_exception from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import message_flashed from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import request_finished from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import request_started from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import request_tearing_down from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import signals_available from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import template_rendered from wildcard import (unused-wildcard-import)
+app.py:3:0: W0614: Unused import render_template_string from wildcard import (unused-wildcard-import)
+app.py:8:0: W0611: Unused import sqlite3 (unused-import)
+app.py:8:0: C0411: standard import "import sqlite3" should be placed before "from flask import *" (wrong-import-order)
+app.py:11:0: C0411: standard import "import logging" should be placed before "from flask import *" (wrong-import-order)
+
+----------------------------------------------------------------------
+Your code has been rated at -19.86/10 (previous run: -5.38/10, -14.47)
+

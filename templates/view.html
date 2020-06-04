@@ -1,19 +1,39 @@
 <!doctype html>
 <title>Simple tables</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="integrety-key" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<script>$(document).ready( function () {
-  $('#table').DataTable();
-} );</script>
+<script>
+  $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
  <div class=page>
   <h1>list</h1>
-  {% for table in tables %}
-    <h2>{{titles[loop.index]}}</h2>
-    {{ table|safe }}
-  {% endfor %}
-
-
+  <table id = "table"  class="display">
+    <tr>
+        <th>id</th>
+        <th>first name</th>
+        <th>country</th>
+        <th>city</th>
+        <th>profession</th>
+        <th>age</th>
+        <th>gender</th>
+        <th>rand</th>
+     </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.country }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.profession }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.rand }}</td>
+        </tr>
+    {% endfor %}
+</table>
 
 </div>
