@@ -1,10 +1,12 @@
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BI APP DEMO</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
 <nav>
-  <h1>BI API APP</h1>
-  <ul>
+    <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/tables">tables</a></li>
     <li><a href="/graphics">graphics</a></li>
@@ -12,9 +14,7 @@
     <li><a href="/json">json</a></li>
     <li><a href="/getusers">get all users</a></li>
     <li><a href="/adduser">add new user</a></li>
-    <li><form action="/regenerateDF">
-      <input type="submit" value="Regenerate DF" />
-  </form></li>
+    <li><a href="/regenerateDF">Regenerate DF</a></li>
   </ul>
 </nav>
 <section class="content">

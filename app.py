@@ -10,7 +10,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import logging
 import DFToSql
-from flask import jsonify
+
 
 
 data=None
@@ -53,6 +53,14 @@ def regenerateDF():
 def getUserById(id):
     user=User.query.get(id)
     return render_template("user.html",user=user)
+
+@app.route("/deleteuser/<id>")
+def deleteUser(id):
+    user=User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect("/tables")
+
 @app.route("/getusers")
 def getUsers():
     users=User.query.all()
@@ -61,6 +69,7 @@ def getUsers():
 @app.route("/adduser")
 def addUserForm():
     return render_template("addUserForm.html")
+
 @app.route("/info")
 def getInfo():
     head= data.head()
@@ -85,6 +94,7 @@ def adduser():
         except EnvironmentError:
             print("error al inserir usuari")
     return redirect("/")
+
 @app.route("/json")
 def dfToJson():
     # users=User.query.all()
@@ -94,7 +104,6 @@ def dfToJson():
 
 @app.route("/hello/<name>")
 @app.route("/hello",defaults={'name': 'john'})
-
 def sayHello(name):
    return render_template("hello.html",name=name)
 
@@ -138,6 +147,7 @@ if __name__ == "__main__":
         generateDF()
     app.register_error_handler(404, not_found)
     app.run(debug=True)
-    # https://sarahleejane.github.io/learning/python/2015/08/09/simple-tables-in-webapps-using-flask-and-pandas-with-python.html
     # https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
     #https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
+    #https://medium.com/@allwindicaprio/crud-operations-using-flask-and-sqlalchemy-7291e340dcc8
+    # https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world

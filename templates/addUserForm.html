@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <form action="/add" method="POST">
 <p>id</p>
 <input type="number" name="id" id="id">
@@ -18,3 +20,4 @@
 <br>
 <input type="submit" name="enviar">
 </form>
+{% endblock %}
