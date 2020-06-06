@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/modifyUser/{{ user.id }}" method="POST">
+<p>id</p>
+<input type="number" readonly="readonly" name="id" id="id" value="{{user.id}}">
+<p>firstname</p>
+<input type="text" name="firstname" id="firstname" value="{{user.firstname}}">
+<p>country</p>
+<input type="text" name="country" id="country" value="{{user.country}}">
+<p>city</p>
+<input type="text" name="city" id="city" value="{{user.city}}">
+<p>profession</p>
+<input type="text" name="profession" id="profession"value="{{user.profession}}">
+<p>age</p>
+<input type="number" name="age" id="age" value="{{user.age}}">
+<p>gender</p>
+<select name="gender" id="gender" value="{{user.gender}}">
+    <option value="male">male</option>
+    <option value="female">female</option>
+  </select>
+<p>rand</p>
+<input type="number" name="rand" id="rand" value="{{user.rand}}">
+<br>
+<input type="submit" name="enviar">
+</form>
+{% endblock %}

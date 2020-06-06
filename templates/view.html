@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
  <div class=page>
-  <h1>list</h1>
   <table>
+      <thead>
     <tr>
         <th>id</th>
         <th>first name</th>
@@ -12,7 +12,10 @@
         <th>age</th>
         <th>gender</th>
         <th>rand</th>
+        <th colspan="2">options</th>
      </tr>
+    </thead>
+    <tbody>
     {% for user in users %}
         <tr>
             <td>{{ user.id }}</td>
@@ -23,8 +26,11 @@
             <td>{{ user.age }}</td>
             <td>{{ user.gender }}</td>
             <td>{{ user.rand }}</td>
+            <td><a href="deleteuser/{{ user.id }}">delete</a></td>
+            <td><a href="modifyUser/{{ user.id }}">modify</a></td>
         </tr>
     {% endfor %}
+</tbody>
 </table>
 
 </div>

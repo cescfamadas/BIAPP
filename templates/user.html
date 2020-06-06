@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-<p> {{user}}</p> 
+{%if user %}
+<ul>
+<li>id:{{ user.id }}</li>
+<li>firstname: {{ user.firstname }}</li>
+<li>country: {{ user.country }}</li>
+<li>city: {{ user.city }}</li>
+<li>profession: {{ user.profession }}</li>
+<li>age: {{ user.age }}</li>
+<li>gender: {{ user.gender }}</li>
+<li>rand: {{ user.rand }}</li>
+</ul>
+{% else %}
+{% for user in users %}
+<p> {{user}}</p>
+{% endfor %}
+{% endif %}
 {% endblock %}

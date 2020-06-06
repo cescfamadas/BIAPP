@@ -10,6 +10,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import logging
 import DFToSql
+from werkzeug.exceptions import HTTPException
 
 
 
@@ -32,7 +33,7 @@ class User(db.Model):
     rand=db.Column(db.Integer,nullable=False)
 
     def __repr__(self):
-        return '<User id={} first name={} country={} city={} profession={} age={} gender={} rand={}>'.format(self.id,self.firstname,self.country,self.city,self.profession,self.age,self.gender,self.rand)
+        return 'User id={} first name={} country={} city={} profession={} age={} gender={} rand={}'.format(self.id,self.firstname,self.country,self.city,self.profession,self.age,self.gender,self.rand)
 
 
 def generateDF():
@@ -64,11 +65,31 @@ def deleteUser(id):
 @app.route("/getusers")
 def getUsers():
     users=User.query.all()
-    return render_template("user.html",user=users)
-
+    return render_template("user.html",users=users,title="all users")
+    
 @app.route("/adduser")
 def addUserForm():
     return render_template("addUserForm.html")
+@app.route("/modifyUser/<id>",methods=['GET','POST'])
+def modifyUser(id):
+    user=User.query.get(id)
+    if request.method== 'GET':
+        return render_template("modifyUserForm.html",user=user)
+    elif request.method== 'POST':
+        user.id=request.form['id']
+        user.firstname=request.form['firstname']
+        user.city=request.form['city']
+        user.country=request.form['country']
+        user.profession=request.form['profession']
+        user.age=request.form['age']
+        user.gender=request.form['gender']
+        user.rand=request.form['rand']
+        try:
+            db.session.commit()
+        except Exception:
+            print(Exception)
+    return redirect("/")
+
 
 @app.route("/info")
 def getInfo():
@@ -82,12 +103,13 @@ def adduser():
         logging.info("POST")
         user_id=request.form['id']
         user_firstname=request.form['firstname']
+        user_city=request.form['city']
         user_country=request.form['country']
         user_profession=request.form['profession']
         user_age=request.form['age']
         user_gender=request.form['gender']
         user_rand=request.form['rand']
-        new_user=User(id=user_id,firstname=user_firstname,country=user_country,profession=user_profession,age=user_age,gender=user_gender,rand=user_rand)
+        new_user=User(id=user_id,firstname=user_firstname,city=user_city,country=user_country,profession=user_profession,age=user_age,gender=user_gender,rand=user_rand)
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -97,9 +119,8 @@ def adduser():
 
 @app.route("/json")
 def dfToJson():
-    # users=User.query.all()
-    # return jsonify(users)
-    return Response(data.to_json(orient="records"), mimetype='application/json')
+    # return Response(data.to_json(orient="records"), mimetype='application/json')
+    return render_template("json.html",json=data.to_json(orient="records"))
 
 
 @app.route("/hello/<name>")
@@ -115,7 +136,16 @@ def show_tables():
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html',e=e), 404
+
+@app.errorhandler(500)
+def handle_exception(e):
+    # pass through HTTP errors
+    if isinstance(e, HTTPException):
+        return e
+
+    # now you're handling non-HTTP exceptions only
+    return render_template("500_generic.html", e=e), 500
 
 @app.route("/graphics")
 def show_graphics():
@@ -138,6 +168,7 @@ def show_graphics():
 def index():
     return render_template('index.html')
 
+
 if __name__ == "__main__":
     file = pathlib.Path("test.db")
     if file.exists():
@@ -146,6 +177,7 @@ if __name__ == "__main__":
         DFToSql.dfToSql()
         generateDF()
     app.register_error_handler(404, not_found)
+    app.register_error_handler(500, handle_exception)
     app.run(debug=True)
     # https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
     #https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
