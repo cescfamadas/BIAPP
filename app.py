@@ -10,11 +10,13 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import logging
 import DFToSql
+from flask import jsonify
+
 
 data=None
 logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+db_url=app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -35,7 +37,7 @@ class User(db.Model):
 
 def generateDF():
     global data
-    engine = create_engine("sqlite:///test.db")
+    engine = create_engine(db_url)
     sqlite_connection = engine.connect()
     sqlite_table = "User"
     data=pd.read_sql(sqlite_table, sqlite_connection)
@@ -85,7 +87,10 @@ def adduser():
     return redirect("/")
 @app.route("/json")
 def dfToJson():
+    # users=User.query.all()
+    # return jsonify(users)
     return Response(data.to_json(orient="records"), mimetype='application/json')
+
 
 @app.route("/hello/<name>")
 @app.route("/hello",defaults={'name': 'john'})
@@ -126,7 +131,7 @@ def index():
 
 if __name__ == "__main__":
     file = pathlib.Path("test.db")
-    if file.exists ():
+    if file.exists():
         generateDF()
     else:
         DFToSql.dfToSql()

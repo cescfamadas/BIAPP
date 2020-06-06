@@ -1,17 +1,6 @@
-<!doctype html>
-<title>Simple tables</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="integrety-key" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<script>
-  $(document).ready( function () {
-    $('#table').DataTable();
-} );
-</script>
  <div class=page>
   <h1>list</h1>
-  <table id = "table"  class="display">
+  <table>
     <tr>
         <th>id</th>
         <th>first name</th>
