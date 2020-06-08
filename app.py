@@ -11,7 +11,9 @@ import matplotlib.pyplot as plt
 import logging
 import DFToSql
 from werkzeug.exceptions import HTTPException
-
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import io
 
 
 data=None
@@ -53,7 +55,7 @@ def regenerateDF():
 @app.route("/getuser/<id>")
 def getUserById(id):
     user=User.query.get(id)
-    return render_template("user.html",user=user)
+    return render_template("user.html",user=user, title="USER {}".format(user.id))
 
 @app.route("/deleteuser/<id>")
 def deleteUser(id):
@@ -65,16 +67,16 @@ def deleteUser(id):
 @app.route("/getusers")
 def getUsers():
     users=User.query.all()
-    return render_template("user.html",users=users,title="all users")
+    return render_template("user.html",users=users,title="ALL USERS")
     
 @app.route("/adduser")
 def addUserForm():
-    return render_template("addUserForm.html")
+    return render_template("addUserForm.html",title="ADD USER")
 @app.route("/modifyUser/<id>",methods=['GET','POST'])
 def modifyUser(id):
     user=User.query.get(id)
     if request.method== 'GET':
-        return render_template("modifyUserForm.html",user=user)
+        return render_template("modifyUserForm.html",user=user,title=" MODIFY USER {}".format(user.id))
     elif request.method== 'POST':
         user.id=request.form['id']
         user.firstname=request.form['firstname']
@@ -88,14 +90,15 @@ def modifyUser(id):
             db.session.commit()
         except Exception:
             print(Exception)
-    return redirect("/")
+    return redirect("/tables")
 
 
 @app.route("/info")
 def getInfo():
     head= data.head()
     columns=list(data.columns)
-    return render_template("info.html",head=head,columns=columns) 
+    count=data.count()
+    return render_template("info.html",head=head,columns=columns,count=count,title="INFO") 
 
 @app.route("/add",methods=['POST'])
 def adduser():
@@ -119,24 +122,35 @@ def adduser():
 
 @app.route("/json")
 def dfToJson():
-    # return Response(data.to_json(orient="records"), mimetype='application/json')
-    return render_template("json.html",json=data.to_json(orient="records"))
+    return render_template("json.html",json=data.to_json(orient="records"),title="JSON")
+
+
+@app.route('/plot/<var1>/<var2>')
+def plot(var1,var2):
+	pie =data.groupby([var1,var2]).size().unstack().plot(kind='bar',stacked=True)
+	fig = pie.get_figure()
+	canvas = FigureCanvas(fig)
+	output = io.BytesIO()
+	canvas.print_png(output)
+	response = make_response(output.getvalue())
+	response.mimetype = 'image/png'
+	return response
 
 
 @app.route("/hello/<name>")
 @app.route("/hello",defaults={'name': 'john'})
 def sayHello(name):
-   return render_template("hello.html",name=name)
+   return render_template("hello.html",name=name,title="HELLO {}".format(name))
 
 
 @app.route("/tables")
 def show_tables():
     users=User.query.all()
-    return render_template('view.html',users=users)
+    return render_template('view.html',users=users,title="USERS TABLE")
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template('404.html',e=e), 404
+    return render_template('404.html',title="ERROR 404",e=e), 404
 
 @app.errorhandler(500)
 def handle_exception(e):
@@ -145,28 +159,33 @@ def handle_exception(e):
         return e
 
     # now you're handling non-HTTP exceptions only
-    return render_template("500_generic.html", e=e), 500
+    return render_template("500_generic.html",title="ERROR 500", e=e), 500
 
 @app.route("/graphics")
 def show_graphics():
+   names=[]
    data.groupby(['country','profession']).size().unstack().plot(kind='bar',stacked=True)
-   plt.savefig('static\demo-file.png')
+   plt.savefig('static\country-profession.png')
+   names.append("country-profession")
    
    data.groupby(['gender','profession']).size().unstack().plot(kind='bar',stacked=True)
-   plt.savefig('static\demo-file1.png')
-   
+   plt.savefig('static\gender-profession')
+   names.append("gender-profession")
+
    data[['age']].plot(kind='hist',bins=[18,22,26,30,35],rwidth=0.8)
-   plt.savefig('static\demo-file2.png')
+   plt.savefig('static\hist-age.png')
+   names.append("hist-age")
    
    data.plot(kind='scatter',x='rand',y='age')
-   plt.savefig('static\demo-file3.png')
+   plt.savefig('static\scatter-rand-age.png')
+   names.append("scatter-rand-age")
    
-   return render_template('graphic.html')
+   return render_template('graphic.html',title="GRAPHICS",names=names)
 
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html',title="HOME")
 
 
 if __name__ == "__main__":

@@ -3,8 +3,9 @@ env/
 constants.py
 __pycache__/
 test.db
-static/demo-file.png
-static/demo-file1.png
-static/demo-file3.png
-static/demo-file2.png
 lint.txt
+static/country-profession.png
+static/gender-profession.png
+static/grafic1.png
+static/hist-age.png
+static/scatter-rand-age.png

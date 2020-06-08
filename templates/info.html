@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>File head: {{head}}</p> 
-<p>File columns: {{columns}}</p> 
+<h3>Dataframe head:</h3> 
+<p>{{head}}</p>
+<h3>Dataframe columns:</h3>
+<ul>
+    {%for column in columns %}
+    <li>{{column}}</li>
+    {%endfor%}
+</ul> 
+<h3>number of registers</h3>
+<p>{{count}}</p>
 {% endblock %}

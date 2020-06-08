@@ -33,6 +33,7 @@
     text-align: center;
     color: white;
     background-color: black;
+    
  }
  table{
     width: 100%;
@@ -46,3 +47,14 @@
    color: white;
  }
  table tbody tr:nth-child(even) {background-color: gray;}
+ .graphicPage{
+  column-count: 2;
+  column-rule-style: solid;
+  column-gap: 40px;
+ }
+ .graphic{
+   text-align: center;
+  margin: auto;
+  width: auto;
+  height: auto;
+ }
