@@ -3,8 +3,3 @@ env/
 constants.py
 __pycache__/
 lint.txt
-static/country-profession.png
-static/gender-profession.png
-static/grafic1.png
-static/hist-age.png
-static/scatter-rand-age.png
