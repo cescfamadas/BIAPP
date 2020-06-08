@@ -2,7 +2,6 @@
 env/
 constants.py
 __pycache__/
-test.db
 lint.txt
 static/country-profession.png
 static/gender-profession.png
