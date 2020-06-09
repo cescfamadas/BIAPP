@@ -4,7 +4,7 @@ import sqlite3
 from sqlalchemy import create_engine
 def dfToSql():
     df = read_csv('data.csv')
-    engine = create_engine("sqlite:///test.db", echo=True)
+    engine = create_engine("sqlite:///test.db")
     sqlite_connection = engine.connect()
     sqlite_table = "User"
     df.to_sql(sqlite_table, sqlite_connection, if_exists='fail')

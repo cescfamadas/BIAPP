@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 <form action="/modifyUser/{{ user.id }}" method="POST">
-<p>id</p>
-<input type="number" readonly="readonly" name="id" id="id" value="{{user.id}}">
-<p>firstname</p>
-<input type="text" name="firstname" id="firstname" value="{{user.firstname}}">
-<p>country</p>
-<input type="text" name="country" id="country" value="{{user.country}}">
-<p>city</p>
-<input type="text" name="city" id="city" value="{{user.city}}">
-<p>profession</p>
-<input type="text" name="profession" id="profession"value="{{user.profession}}">
-<p>age</p>
-<input type="number" name="age" id="age" value="{{user.age}}">
-<p>gender</p>
-<select name="gender" id="gender" value="{{user.gender}}">
-    <option value="male">male</option>
-    <option value="female">female</option>
-  </select>
-<p>rand</p>
-<input type="number" name="rand" id="rand" value="{{user.rand}}">
-<br>
-<input type="submit" name="enviar">
-</form>
+  <dl>
+  <dt><label>id</label></dt>
+  <dd><input type="number" readonly="readonly" name="id" id="id" value="{{user.id}}"></dd>
+  <dt><label>firstname</label></dt>
+  <dd><input type="text" name="firstname" id="firstname" value="{{user.firstname}}"></dd>
+  <dt><label>country</label></dt>
+  <dd><input type="text" name="country" id="country" value="{{user.country}}"></dd>
+  <dt><label>city</label></dt>
+  <dd><input type="text" name="city" id="city" value="{{user.city}}"></dd>
+  <dt><label>profession</label></dt>
+  <dd><input type="text" name="profession" id="profession"value="{{user.profession}}"></dd>
+  <dt><label>age</label></dt>
+  <dd><input type="number" name="age" id="age" value="{{user.age}}"></dd>
+  <dt><label>gender</label></dt>
+  <dd><select name="gender" id="gender" value="{{user.gender}}"></dd>
+      <option value="male">male</option>
+      <option value="female">female</option>
+    </select></dd>
+  <dt><label>rand</label></dt>
+  <dd><input type="number" name="rand" id="rand" value="{{user.rand}}"></dd>
+  <br>
+  <input type="submit" name="enviar">
+</dl>
+  </form>
 {% endblock %}

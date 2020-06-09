@@ -58,3 +58,9 @@
   width: auto;
   height: auto;
  }
+
+ #plot{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+ }

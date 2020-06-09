@@ -124,6 +124,16 @@ def adduser():
 def dfToJson():
     return render_template("json.html",json=data.to_json(orient="records"),title="JSON")
 
+@app.route('/plot',methods=['GET','POST'])
+def plots():
+    columns=list(data.columns)
+    if request.method== 'GET':
+        return render_template("plot.html",columns=columns)
+    elif request.method=='POST':
+        var1= request.form['var1']
+        var2= request.form['var2']
+        url="/plot/{}/{}".format(var1,var2)
+        return render_template("plot.html",columns=columns,url=url)
 
 @app.route('/plot/<var1>/<var2>')
 def plot(var1,var2):

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<form id="plot" action="/plot" method="POST">
+<p>var 1</p>
+<select name="var1" id="var1">
+ {% for column in columns%}
+ <option  value="{{column}}">{{column}}</option>   
+{%endfor%}
+</select>
+<p>var 2</p>
+<select name="var2" id="var2">
+ {% for column in columns%}
+ <option  value="{{column}}">{{column}}</option>   
+{%endfor%}
+</select>
+<input type="submit">
+</form>
+{% if url is defined %}
+<h3>example url: {{url}}</h3>
+<img src="{{url}}" alt="test">
+{% else %}
+    <p>choose a variable</p>
+{% endif %}
+
+{% endblock %}

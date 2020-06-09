@@ -1,0 +1,7 @@
+git clone https://github.com/cescfamadas/BIAPP.git
+pip install virtualenv
+cd BIAPP
+py -m venv env
+.\env\Scripts\activate
+pip install -r requirements.txt
+python app.py
