@@ -207,8 +207,4 @@ if __name__ == "__main__":
         generateDF()
     app.register_error_handler(404, not_found)
     app.register_error_handler(500, handle_exception)
-    app.run(debug=True)
-    # https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
-    #https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
-    #https://medium.com/@allwindicaprio/crud-operations-using-flask-and-sqlalchemy-7291e340dcc8
-    # https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+    app.run()

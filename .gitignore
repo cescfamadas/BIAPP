@@ -3,3 +3,4 @@ env/
 constants.py
 __pycache__/
 lint.txt
+links.txt
